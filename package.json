@@ -1,0 +1,45 @@
+{
+  "name": "fastly-image",
+  "version": "1.0.0",
+  "description": "Format Fastly image-optimization urls",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "jest --config jest.config.json",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts(x)\" \"src/**/*.js(x)\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordankid93/fastly-image.git"
+  },
+  "keywords": [
+    "fastly",
+    "image optimization",
+    "react"
+  ],
+  "author": "Isaiah Smith",
+  "license": "MIT",
+  "files": [
+    "lib/**/*"
+  ],
+  "bugs": {
+    "url": "https://github.com/jordankid93/fastly-image/issues"
+  },
+  "homepage": "https://github.com/jordankid93/fastly-image#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.17",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.5.3"
+  }
+}
