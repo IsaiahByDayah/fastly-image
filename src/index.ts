@@ -174,23 +174,93 @@ interface Sharpen {
   threshold: number
 }
 
-export interface IFastlyImageParams {
+/**
+ * Value between `1` and `1000`
+ *
+ * Decreases the definition and focus of an image
+ */
+type Blur = number
+
+/**
+ * Enables the source image to be converted (a.k.a., "transcoded") from one encoded format to another. This is very useful when the source image has been saved in a sub-optimal file format that hinders performance
+ *
+ * The source image can be any of the following image formats: `JPEG`, `PNG`, `GIF`, `WEBP`
+ */
+type Format = 'gif' | 'png' | 'png8' | 'jpg' | 'pjpg' | 'webp' | 'webpll' | 'webply'
+
+/**
+ * Extract the first frame from an animated image sequence
+ *
+ * Only supported when the source image is an Animated GIF
+ *
+ * The first frame is currently the only frame able to be returned
+ */
+type Frame = boolean
+
+/**
+ * Number between `1` and `100`
+ *
+ * Output image quality for lossy file formats
+ *
+ * If the `auto` is enabled through params or in the service settings, an array of 2 numbers can be supplied with the second value used as the quality value if the requestor sends the `accept: image/webp` request header
+ */
+type Quality = number | number[]
+
+/**
+ * Turns on functionality that automates certain optimization features
+ *
+ * Overrides the `format` parameter in browsers that support WebP
+ */
+type Auto = boolean
+
+/**
+ * Enables image upscaling
+ *
+ * Must be used with the `width`, `height` or `dpr/devicePixelRatio` parameters to see the effects in the output image
+ */
+type Upscaling = boolean
+
+/**
+ * Control the resizing filter used to generate a new image with a higher or lower number of pixels
+ *
+ * When making an image smaller, use `bicubic`, which has a natural sharpening effect
+ *
+ * When making an image larger, use `bilinear`, which has a natural smoothing effect
+ *
+ * When resizing pixel art, use `nearest`, which has a natural pixelation effect
+ *
+ * When quality is the main concern, use `lanczos`, which typically renders the best results
+ */
+type ResizeFilter = 'nearest' | 'bilinear' | 'bicubic' | 'lanczos' | 'lanczos2'
+
+export interface FastlyImageParams {
   width?: PixelOrPercentage
   height?: PixelOrPercentage
-  dpr?: DevicePixelRation
+  dpr?: DevicePixelRation // Alias for `devicePixelRatio`
   devicePixelRatio?: DevicePixelRation
   fit?: 'bounds' | 'cover' | 'crop'
   crop?: Crop
   trim?: Trim
-  pad?: Padding
+  pad?: Padding // Alias for `padding`
   padding?: Padding
   canvas?: Canvas
-  bgColor?: Color
+  bgColor?: Color // Alias for `backgroundColor`
   backgroundColor?: Color
-  orient?: Orientation
+  orient?: Orientation // Alias for `orientation`
   orientation?: Orientation
+  bright?: Brightness // Alias for `brightness`
   brightness?: Brightness
+  con?: Contrast // Alias for `constrast`
   contrast?: Contrast
+  sat?: Saturation // Alias for `saturation`
   saturation?: Saturation
   sharpen?: Sharpen
+  blur?: Blur
+  format?: Format
+  frame?: Frame
+  quality?: Quality
+  auto?: Auto
+  upscaling?: Upscaling
+  resFil?: ResizeFilter // Alias for `resizeFilter`
+  resizeFilter?: ResizeFilter
 }
