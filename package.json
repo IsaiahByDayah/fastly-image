@@ -27,7 +27,7 @@
   "author": "Isaiah Smith",
   "license": "MIT",
   "files": [
-    "lib/**/*"
+    "dist/**/*"
   ],
   "bugs": {
     "url": "https://github.com/jordankid93/fastly-image/issues"
