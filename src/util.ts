@@ -35,3 +35,7 @@ export const compact = (obj: { [key: string]: any }, options?: Partial<ICompactO
 
   return newObj
 }
+
+export const isBlobUrl = (url: string) => {
+  return url.substring(0, 5) === 'blob:'
+}
