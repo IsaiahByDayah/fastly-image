@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash'
 import * as queryString from 'query-string'
-import { compact } from './util'
+import { compact, isBlobUrl } from './util'
 
 /**
  * A Regex to test if percent strings are properly formatted
@@ -502,7 +502,31 @@ export interface FastlyImageParams {
   resizeFilter?: ResizeFilter
 }
 
-const fastlyImageUrl = (imageUrl: string, params: FastlyImageParams): string => {
+export interface FastlyImageOptions {
+  /**
+   * Rather fastly params should be applied to blob URLs
+   *
+   * Default: `false`
+   */
+  supportBlobs?: boolean
+}
+
+const DEFAULT_OPTIONS: FastlyImageOptions = {
+  supportBlobs: false,
+}
+
+const fastlyImageUrl = (imageUrl: string, params: FastlyImageParams, options?: FastlyImageOptions): string => {
+  // Apple option overrides
+  const _options = {
+    ...DEFAULT_OPTIONS,
+    ...options,
+  }
+
+  // Handle Blob Url Support
+  if (!_options.supportBlobs && isBlobUrl(imageUrl)) {
+    return imageUrl
+  }
+
   const { url, query } = queryString.parseUrl(imageUrl, { decode: false })
 
   // Destructure
