@@ -515,7 +515,7 @@ const DEFAULT_OPTIONS: FastlyImageOptions = {
   supportBlobs: false,
 }
 
-const fastlyImageUrl = (imageUrl: string, params: FastlyImageParams, options?: FastlyImageOptions) => {
+const fastlyImageUrl = (imageUrl: string, params: FastlyImageParams, options?: FastlyImageOptions): string => {
   // Apple option overrides
   const _options = {
     ...DEFAULT_OPTIONS,
