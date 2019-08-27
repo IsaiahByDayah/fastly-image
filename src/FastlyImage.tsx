@@ -1,19 +1,14 @@
 import * as React from 'react'
 import { DetailedHTMLProps, FunctionComponent, ImgHTMLAttributes } from 'react'
-import { FastlyImageParams, fastlyImageUrl } from '.'
-import { isBlobUrl } from './util'
+import { FastlyImageOptions, FastlyImageParams, fastlyImageUrl } from '.'
 
 export interface FastlyImageProps extends DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> {
   fastlyParams: FastlyImageParams
-  supportBlobs?: boolean
+  fastlyImageOptions?: FastlyImageOptions
 }
 
-const FastlyImage: FunctionComponent<FastlyImageProps> = ({ fastlyParams, src, supportBlobs = false, ...rest }) => {
-  if (!supportBlobs && src && isBlobUrl(src)) {
-    fastlyParams = {}
-  }
+const FastlyImage: FunctionComponent<FastlyImageProps> = ({ fastlyParams, fastlyImageOptions, src, ...rest }) => (
+  <img src={src ? fastlyImageUrl(src, fastlyParams, fastlyImageOptions) : undefined} {...rest} />
+)
 
-  return <img src={src ? fastlyImageUrl(src, fastlyParams) : undefined} {...rest} />
-}
-
-export default FastlyImage
+export default React.forwardRef<HTMLImageElement, FastlyImageProps>(FastlyImage)
