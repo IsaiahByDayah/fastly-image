@@ -11,4 +11,4 @@ const FastlyImage: FunctionComponent<FastlyImageProps> = ({ fastlyParams, fastly
   <img src={src ? fastlyImageUrl(src, fastlyParams, fastlyImageOptions) : undefined} {...rest} />
 )
 
-export default React.forwardRef<HTMLImageElement, FastlyImageProps>(FastlyImage)
+export default FastlyImage
