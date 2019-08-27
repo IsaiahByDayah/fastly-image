@@ -504,7 +504,7 @@ export interface FastlyImageParams {
 
 export interface FastlyImageOptions {
   /**
-   * Rather fastly params should be applied to blob urls
+   * Rather fastly params should be applied to blob URLs
    *
    * Default: `false`
    */
