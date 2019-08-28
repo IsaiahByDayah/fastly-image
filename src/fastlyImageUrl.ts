@@ -509,10 +509,18 @@ export interface FastlyImageOptions {
    * Default: `false`
    */
   supportBlobs?: boolean
+
+  /**
+   * Shortcircuit toggle for disabling apply any params
+   *
+   * Default: `false`
+   */
+  disable?: boolean
 }
 
 const DEFAULT_OPTIONS: FastlyImageOptions = {
   supportBlobs: false,
+  disable: false,
 }
 
 const fastlyImageUrl = (imageUrl: string, params: FastlyImageParams, options?: FastlyImageOptions): string => {
@@ -520,6 +528,11 @@ const fastlyImageUrl = (imageUrl: string, params: FastlyImageParams, options?: F
   const _options = {
     ...DEFAULT_OPTIONS,
     ...options,
+  }
+
+  // Handle Shortcircuit disable
+  if (_options.disable) {
+    return imageUrl
   }
 
   // Handle Blob Url Support
